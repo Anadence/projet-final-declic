@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prêt-à-porter | Boutique</title>
+  <style>
+    /* 🎨 STYLES GLOBAUX */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      background: #222;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      background: #ff4081;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    nav button:hover { background: #e91e63; }
+
+    section { display: none; padding: 20px; }
+    section.active { display: block; }
+
+    /* 🌙 DARK MODE */
+    body.dark {
+      background: #121212;
+      color: #eee;
+    }
+    body.dark header { background: #000; }
+    body.dark nav button { background: #444; }
+
+    /* 🛍️ BOUTIQUE */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .product {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .product img { width: 100%; border-radius: 10px; }
+    .product:hover { transform: scale(1.05); }
+    body.dark .product { background: #1e1e1e; }
+
+    /* 📩 FORMULAIRE CONTACT */
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: auto;
+    }
+    form input, form textarea, form button {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    form button {
+      background: #ff4081;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* 🎛️ FILTRES */
+    .filters { margin-bottom: 20px; }
+    .filters button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .filters button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ HEADER -->
+  <header>
+    <h1>✨ Boutique Prêt-à-porter</h1>
+    <nav>
+      <button onclick="showSection('home')">Accueil</button>
+      <button onclick="showSection('about')">À propos</button>
+      <button onclick="showSection('shop')">Boutique</button>
+      <button onclick="showSection('contact')">Contact</button>
+      <button onclick="toggleDarkMode()">🌙 / ☀️</button>
+    </nav>
+  </header>
+
+  <!-- ✅ ACCUEIL -->
+  <section id="home" class="active">
+    <h2>Bienvenue dans notre boutique</h2>
+    <p>Découvrez les dernières tendances en prêt-à-porter. Homme, Femme, Enfant 👕👗👶</p>
+  </section>
+
+  <!-- ✅ À PROPOS -->
+  <section id="about">
+    <h2>À propos de nous</h2>
+    <p>Notre boutique de prêt-à-porter propose des vêtements modernes, élégants et accessibles à tous. 
+       Notre mission : rendre la mode disponible et abordable pour toute la famille.</p>
+  </section>
+
+  <!-- ✅ BOUTIQUE -->
+  <section id="shop">
+    <h2>Nos Produits</h2>
+
+    <!-- 🎛️ FILTRES -->
+    <div class="filters">
+      <button onclick="filterProducts('all')">Tous</button>
+      <button onclick="filterProducts('homme')">Homme</button>
+      <button onclick="filterProducts('femme')">Femme</button>
+      <button onclick="filterProducts('enfant')">Enfant</button>
+    </div>
+
+    <div class="products">
+      <div class="product" data-category="homme">
+        <img src="https://via.placeholder.com/200x200?text=Chemise+Homme" alt="">
+        <h3>Chemise Homme</h3>
+        <p>20 000 FCFA</p>
+      </div>
+      <div class="product" data-category="femme">
+        <img src="https://via.placeholder.com/200x200?text=Robe+Femme" alt="">
+        <h3>Robe Femme</h3>
+        <p>25 000 FCFA</p>
+      </div>
+      <div class="product" data-category="enfant">
+        <img src="https://via.placeholder.com/200x200?text=T-shirt+Enfant" alt="">
+        <h3>T-shirt Enfant</h3>
+        <p>10 000 FCFA</p>
+      </div>
+      <div class="product" data-category="homme">
+        <img src="https://via.placeholder.com/200x200?text=Jean+Homme" alt="">
+        <h3>Jean Homme</h3>
+        <p>22 000 FCFA</p>
+      </div>
+      <div class="product" data-category="femme">
+        <img src="https://via.placeholder.com/200x200?text=Blouse+Femme" alt="">
+        <h3>Blouse Femme</h3>
+        <p>18 000 FCFA</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ CONTACT -->
+  <section id="contact">
+    <h2>Contactez-nous</h2>
+    <form onsubmit="sendMessage(event)">
+      <input type="text" placeholder="Votre nom" required>
+      <input type="email" placeholder="Votre email" required>
+      <textarea placeholder="Votre message" required></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+    <p id="msg-status"></p>
+  </section>
+
+  <script>
+    // 🎛️ Affichage des sections
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    // 🌙 Dark / Light mode
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    // 🛍️ Filtrage produits
+    function filterProducts(category) {
+      document.querySelectorAll(".product").forEach(p => {
+        if (category === "all" || p.dataset.category === category) {
+          p.style.display = "block";
+        } else {
+          p.style.display = "none";
+        }
+      });
+    }
+
+    // 📩 Formulaire contact (simulation)
+    function sendMessage(e) {
+      e.preventDefault();
+      document.getElementById("msg-status").innerText = "✅ Message envoyé avec succès !";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription Étudiant - Centre de Formation</title>
+<style>
+  /* ===== Base ===== */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; background: #007BFF; color:#333; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+
+  /* ===== Formulaire ===== */
+  .form-container {
+    background:white;
+    padding:2rem;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+    width:100%;
+    max-width:500px;
+  }
+
+  h2 {
+    text-align:center;
+    margin-bottom:1.5rem;
+    color:#007BFF;
+  }
+
+  form {
+    display:flex;
+    flex-direction:column;
+  }
+
+  label {
+    margin-bottom:0.3rem;
+    font-weight:bold;
+  }
+
+  input, select {
+    padding:0.6rem;
+    margin-bottom:1rem;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:1rem;
+  }
+
+  input[type="submit"] {
+    background:#007BFF;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+  }
+
+  input[type="submit"]:hover {
+    background:#0056b3;
+  }
+
+  /* ===== Responsive ===== */
+  @media(max-width:600px){
+    .form-container { padding:1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Inscription Étudiant</h2>
+  <form id="inscriptionForm">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" placeholder="Votre nom complet" required>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" placeholder="exemple@domaine.com" required>
+
+    <label for="telephone">Téléphone :</label>
+    <input type="tel" id="telephone" name="telephone" placeholder="+229 00 00 00 00" required>
+
+    <label for="formation">Formation :</label>
+    <select id="formation" name="formation" required>
+      <option value="">--Sélectionnez la formation--</option>
+      <option value="web">Développement Web</option>
+      <option value="design">Design Graphique</option>
+      <option value="marketing">Marketing Digital</option>
+      <option value="photographie">Photographie</option>
+    </select>
+
+    <input type="submit" value="S'inscrire">
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('inscriptionForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('Inscription réussie ! Merci ' + form.nom.value + ' ' + form.prenom.value);
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
